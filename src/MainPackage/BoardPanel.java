@@ -8,12 +8,11 @@ public class BoardPanel extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = -3619605875902942246L;
 
-	private ImageIcon Oicon = new ImageIcon("o.png");
-	private ImageIcon Xicon = new ImageIcon("x.png");
-	
+	private static ImageIcon Oicon = new ImageIcon("o.png");
+	private static ImageIcon Xicon = new ImageIcon("x.png");
 	
 	//make 9 buttons 
-	JButton button1, button2, button3, button4, button5,
+	static JButton button1, button2, button3, button4, button5,
 			button6, button7, button8, button9;
 	
 	
@@ -26,6 +25,7 @@ public class BoardPanel extends JPanel implements ActionListener{
 	public final static String player2Marker = "O";
 	public static int player1Score = 0;
 	public static int player2Score = 0;
+	public static int turnCounter=0;
 	
 	
 	
@@ -70,6 +70,10 @@ public class BoardPanel extends JPanel implements ActionListener{
 		button9.addActionListener(this);
 				
 		
+		
+		
+		
+		
 	
 		//add button to panel
 		this.add(button1);
@@ -86,17 +90,21 @@ public class BoardPanel extends JPanel implements ActionListener{
 		setActionCommand(player1Turn);
 		
 	}
-
-	private void addIconX(JButton targetButton) {
-		targetButton.setIcon(Xicon);
-		targetButton.removeActionListener(this);
+	private void addIconX(JButton targetButton) {	
+		if(targetButton.getIcon()==null) {
+			targetButton.setIcon(Xicon);
+			turnCounter++;
+		}
 		
 	}
 	private void addIconO(JButton targetButton) {
-		targetButton.setIcon(Oicon);
-		targetButton.removeActionListener(this);
+		if(targetButton.getIcon()==null) {
+			targetButton.setIcon(Oicon);
+			turnCounter++;
+		}
 	}
-	public void setActionCommand(boolean player1Turn) {
+	public static void setActionCommand(boolean player1Turn) {
+		
 		if(player1Turn) {
 			button1.setActionCommand(player1Marker);
 			button2.setActionCommand(player1Marker);
@@ -165,8 +173,13 @@ public class BoardPanel extends JPanel implements ActionListener{
 				addIconO(button9);
 			}
 		}
+		
 		checkWin();
+		if(turnCounter==9) {	//game is TIE
+			GameFinished=true;
+		}
 		if(GameFinished) {
+			
 			button1.setEnabled(false);
 			button2.setEnabled(false);
 			button3.setEnabled(false);
@@ -176,17 +189,12 @@ public class BoardPanel extends JPanel implements ActionListener{
 			button7.setEnabled(false);
 			button8.setEnabled(false);
 			button9.setEnabled(false);
+			ScorePanel.updateScore();
+			
 			
 		}
-		
-		
-		
 		player1Turn = !player1Turn;
 		setActionCommand(player1Turn);
-		
-		
-		
-		
 		
 	}
 	public void checkWin() {
@@ -270,7 +278,43 @@ public class BoardPanel extends JPanel implements ActionListener{
 		
 		
 	}
-	
-	
+	public static void boardInit() {
+		GameFinished = false;
+		player1Turn = true;
+		setActionCommand(player1Turn);
+		turnCounter = 0;
+		button1.setIcon(null);
+		button2.setIcon(null);
+		button3.setIcon(null);
+		button4.setIcon(null);
+		button5.setIcon(null);
+		button6.setIcon(null);
+		button7.setIcon(null);
+		button8.setIcon(null);
+		button9.setIcon(null);
+		
+		
+		//enable buttons
+		button1.setEnabled(true);
+		button2.setEnabled(true);
+		button3.setEnabled(true);
+		button4.setEnabled(true);
+		button5.setEnabled(true);
+		button6.setEnabled(true);
+		button7.setEnabled(true);
+		button8.setEnabled(true);
+		button9.setEnabled(true);
+
+		
+		
+		
+		
+	}
+	public static void gameInit() {
+		boardInit();
+		player1Score = 0;
+		player2Score = 0;
+		ScorePanel.updateScore();
+	}
 	
 }

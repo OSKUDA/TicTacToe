@@ -10,7 +10,8 @@ public class GameFrame extends JFrame {
 	public GameFrame() {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(600,600);
+		this.setTitle("Oskuda's TicTacToe");
+		this.setSize(680,600);
 		this.getContentPane().setBackground(Color.pink);
 		this.setLocationRelativeTo(null);
 		this.setLayout(null);
@@ -19,8 +20,9 @@ public class GameFrame extends JFrame {
 		
 		
 		this.add(new BoardPanel());
-		
-		
+		this.add(new PlayerInfoPanel());
+		this.add(new ScorePanel());
+		this.add(new RestartResetPanel());
 		
 		this.setVisible(true);
 		
