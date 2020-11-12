@@ -8,11 +8,14 @@ public class PlayerInfoPanel extends JPanel {
 	
 	JLabel player1MarkerInfoLabel, player2MarkerInfoLabel, player1IndicatorLabel, player2IndicatorLabel;
 	
-	private static ImageIcon Xlowres = new ImageIcon("xlowres.png");
-	private static ImageIcon Olowres = new ImageIcon("olowres.png");
+	private static ImageIcon Xlowres;
+	private static ImageIcon Olowres;
 	
 	
 	public PlayerInfoPanel() {
+		
+		Xlowres = new ImageIcon(getClass().getClassLoader().getResource("xlowres.png"));
+		Olowres = new ImageIcon(getClass().getClassLoader().getResource("olowres.png"));
 		
 		this.setLayout(new FlowLayout(FlowLayout.LEFT,15,0));
 		this.setBounds(7,5,446,96);

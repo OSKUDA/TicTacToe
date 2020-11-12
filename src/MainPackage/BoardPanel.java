@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
 public class BoardPanel extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = -3619605875902942246L;
+	
 
-	private static ImageIcon Oicon = new ImageIcon("o.png");
-	private static ImageIcon Xicon = new ImageIcon("x.png");
+	private static ImageIcon Oicon;
+	private static ImageIcon Xicon;	
+	
 	
 	//make 9 buttons 
 	static JButton button1, button2, button3, button4, button5,
@@ -31,6 +33,9 @@ public class BoardPanel extends JPanel implements ActionListener{
 	
 
 	public BoardPanel() {
+		
+		Oicon = new ImageIcon(getClass().getClassLoader().getResource("o.png"));
+		Xicon = new ImageIcon(getClass().getClassLoader().getResource("x.png"));
 		
 		this.setLayout(new GridLayout(3,3,5,5));
 		this.setBounds(5,105,450,450);
@@ -69,12 +74,6 @@ public class BoardPanel extends JPanel implements ActionListener{
 		button8.addActionListener(this);
 		button9.addActionListener(this);
 				
-		
-		
-		
-		
-		
-	
 		//add button to panel
 		this.add(button1);
 		this.add(button2);
